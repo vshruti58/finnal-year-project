@@ -1,0 +1,19 @@
+/*front end of stacked chart in which user enter number of heads required in the next page, values title of comp and totl value*/
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+       
+        <form action="stacked1.jsp" Method="Post">
+            No of Heads Required<input type="text" name="heads"/><br>
+            Per Head No of values Required<input type="text" name="vals"/><br>
+             Title of comparison <input type="text" name="comp"/><br>
+             Total Value<input type="text" name="total"/><br>
+             
+            <input type="submit" value="Step2">
+    </body>
+</html>

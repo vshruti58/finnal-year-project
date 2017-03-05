@@ -1,0 +1,55 @@
+/*it is the back end coding of stacked chart in which we make a servlet to show that graph */
+package ChartServlets;
+
+import Images.StackedImage;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class StackedChart extends HttpServlet {
+
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+     
+           
+           response.setContentType("image/jpeg");
+OutputStream os=response.getOutputStream();
+       
+        BufferedImage bi=new BufferedImage(500, 500,BufferedImage.TYPE_INT_RGB);
+      
+       String heads[]=request.getParameterValues("headtitle");
+       String values[]=request.getParameterValues("headvalue");
+       int max=Integer.valueOf(request.getParameter("total"));
+       StackedImage.Generate(bi, heads, values,max);
+           boolean write = ImageIO.write(bi, "jpg", os);
+           
+          }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }
+
+}

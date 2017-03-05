@@ -1,0 +1,84 @@
+/*it is the back end coding of stacked chart to generate image */
+package Images;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.util.Random;
+
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
+
+
+public class StackedImage {
+    public static  void Generate(BufferedImage bi,String heads[],String values[],int max)
+    {
+       
+       try
+       {
+        Graphics g=bi.getGraphics();
+      Random rm=new Random();
+      int re,gr,bl;
+          g.setColor(Color.WHITE);
+          Font f=new Font("Arial",Font.BOLD,30);
+       
+          
+   g.drawString("IT-EDU:Auto Generated Image Generation",250,30);
+    g.drawLine(50,60,50,400);
+    g.drawLine(50,400,350,400);
+   int fbreak=max/10;
+  
+    for(int i=1;i<=10;i++)
+               {
+    g.drawLine(45,400-(i*30),50,400-(i*30));
+    if(i*fbreak<100)
+           g.drawString(String.valueOf(i*fbreak),30,400-(i*30)+5);
+    else       
+    g.drawString(String.valueOf(fbreak*i),22,400-(i*30)+5);
+               
+       }
+        System.out.println(heads.length + "," + values.length );
+    
+ float area=300;
+ float point=300/(float)max;
+        System.out.println(point + "," + area );
+ 
+      
+       {
+         int cx=60,cy=400;
+      int last=0;  
+      int phv=values.length/heads.length;
+       for(int k=0;k<values.length;k++)
+       {
+             re=rm.nextInt(255);
+      gr=rm.nextInt(255);
+      bl=rm.nextInt(255);
+       Color c=Color.getHSBColor(re, gr, bl);
+       g.setColor(c);
+            if(k%phv==0 && k>0)
+            {
+                cx=cx + 50;
+                last=0;
+            }
+            float size=Float.valueOf(values[k])*point;
+           g.fillRect(cx, 400-(int)size-last, 30, (int)size);
+            g.setColor(Color.BLACK);
+            if(Integer.valueOf(values[k])<100)
+           g.drawString(values[k],cx+10,400-(int)size-last+20);
+            else
+           g.drawString(values[k],cx+5,400-(int)size-last+20);
+                
+      last=last+(int)size;
+      
+          }
+       }
+
+    }
+    
+    catch(Exception e)
+    {
+        System.out.println(e.toString() + e.getMessage() );
+    }
+    }
+}
